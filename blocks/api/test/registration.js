@@ -292,6 +292,21 @@ describe( 'blocks', () => {
 			} );
 		} );
 
+		it( 'should warn if the icon background and foreground are not readable', () => {
+			const blockType = {
+				save: noop,
+				category: 'common',
+				title: 'block title',
+				icon: {
+					background: '#f00',
+					foreground: '#d00',
+					src: 'block-default',
+				},
+			};
+			registerBlockType( 'core/test-block-icon-unreadable', blockType );
+			expect( console ).toHaveWarned();
+		} );
+
 		it( 'should store a copy of block type', () => {
 			const blockType = { settingName: 'settingValue', save: noop, category: 'common', title: 'block title' };
 			registerBlockType( 'core/test-block-with-settings', blockType );
